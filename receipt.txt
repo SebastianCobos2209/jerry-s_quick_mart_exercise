@@ -1,0 +1,19 @@
+
+=== CHECKOUT RECEIPT ===
+Customer: seva
+Date: 2025-09-09 12:53:18
+--------------------------------
+ITEM                 QUANTITY   UNIT PRICE   TOTAL       
+Milk                 20         $3.50        $70.00      
+Red Bull             10         $4.00        $40.00      
+--------------------------------
+TOTAL NUMBER OF ITEMS SOLD: 30
+SUB-TOTAL: $110.00
+TAX (6.5%): $2.60
+TOTAL: $112.60
+CASH: $800.00
+CHANGE: $687.40
+
+
+====================================
+
