@@ -10,9 +10,20 @@ public class Cart {
     private final List<CartItem> items = new ArrayList<>();
 
     public void addProduct(Product p, int quantity) {
+        if (p.getStock() < quantity) {
+            System.out.println("Not enough stock for " + p.getName() +
+                    ". Available: " + p.getStock());
+            return;
+        }
+
         for(CartItem item: items){
             if(item.getProduct().getName().equalsIgnoreCase(p.getName())){
-                item.setQuantity(item.getQuantity() + quantity);
+                int newQuantity = item.getQuantity() + quantity;
+                if (newQuantity<=p.getStock()){
+                    item.setQuantity(newQuantity);
+                }else{
+                    System.out.println("cannot add that quantity. There's not enough stock for " + p.getName());
+                }
                 return;
             }
         }

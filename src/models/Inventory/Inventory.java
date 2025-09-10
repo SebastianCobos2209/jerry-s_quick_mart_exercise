@@ -23,17 +23,6 @@ public class Inventory {
         }
     }
 
-    public void ChooserData() throws IOException{
-        JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("choose inventory file");
-        int result = chooser.showOpenDialog(null);
-        if(result == JFileChooser.APPROVE_OPTION){
-            File file = chooser.getSelectedFile();
-            UploadProductsData(file.getAbsolutePath());
-        }else {
-            System.out.println("Didn't selected an file");
-        }
-    }
 
     public List<Product> getProducts() {return products;}
 
