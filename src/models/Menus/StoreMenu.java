@@ -11,14 +11,9 @@ import models.Inventory.Product;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class StoreMenu {
-    private final Scanner scanner;
+public record StoreMenu(Scanner scanner) {
 
-    public StoreMenu(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    public void RunStoreMenu(){
+    public void RunStoreMenu() {
         Inventory inventory = new Inventory();
         Customer customer;
 
@@ -53,10 +48,10 @@ public class StoreMenu {
                 option = scanner.nextInt();
                 scanner.nextLine();
 
-                switch(option) {
+                switch (option) {
                     case 1:
                         System.out.println("\n=== ALL PRODUCTS ===");
-                        for(Product p : inventory.getProducts()) {
+                        for (Product p : inventory.getProducts()) {
                             System.out.println(p);
                         }
                         pause(scanner);
@@ -64,7 +59,7 @@ public class StoreMenu {
 
                     case 2:
                         System.out.print("\n=== ADD PRODUCT TO CART ===");
-                        for(Product p : inventory.getProducts()) {
+                        for (Product p : inventory.getProducts()) {
                             System.out.println(p);
                         }
                         System.out.println("Enter the name of the product");
@@ -73,18 +68,18 @@ public class StoreMenu {
                         System.out.println("Enter the amount to be added to the cart");
                         int quantity = scanner.nextInt();
 
-                        if(addProduct != null) {
+                        if (addProduct != null) {
                             customer.addToCart(addProduct, quantity);
-                        }else{
+                        } else {
                             System.out.println("Product not found");
                         }
                         break;
 
                     case 3:
                         System.out.println("\n=== REMOVE PRODUCT TO CART ===");
-                        if(customer.getCart().getProducts().isEmpty()){
+                        if (customer.getCart().getProducts().isEmpty()) {
                             System.out.println("No products found");
-                        }else {
+                        } else {
                             customer.viewCart();
                             System.out.print("Enter the name of the product to remove ");
                             String removeProductName = scanner.nextLine();
@@ -93,10 +88,10 @@ public class StoreMenu {
                                 System.out.print("Enter quantity to remove: ");
                                 int qtyToRemove = scanner.nextInt();
                                 scanner.nextLine();
-                                if(qtyToRemove<=0){
+                                if (qtyToRemove <= 0) {
                                     System.out.println("Quantity must be greater than zero");
-                                }else{
-                                    customer.removeFromCart(toRemoveProduct.getProduct(),qtyToRemove);
+                                } else {
+                                    customer.removeFromCart(toRemoveProduct.getProduct(), qtyToRemove);
                                 }
                                 System.out.println(toRemoveProduct.getProduct().getName() + " has been removed");
                             } else {
@@ -113,24 +108,26 @@ public class StoreMenu {
                     case 5:
                         System.out.println("\n=== CHECKOUT ===");
                         CheckOut checkOut = new CheckOut(customer);
-                        checkOut.processCheckout(scanner);
+                        checkOut.processCheckout(scanner, inventory);
+                        option = 6;
                         break;
 
                     case 6:
-                        System.out.println("\n=== GOOD BYE ===");
+                        System.out.println("\n=== EXIT ===");
                         break;
 
                     default:
                         System.out.println("NOT VALID OPTION");
                 }
 
-            } while(option != 5);
+            } while (option != 6);
 
         } catch (IOException e) {
             System.out.println("CANNOT READ THE FILE: " + e.getMessage());
         }
     }
-    public static void pause(Scanner scanner){
+
+    public static void pause(Scanner scanner) {
         System.out.println("Press any key to continue...");
         scanner.nextLine();
     }

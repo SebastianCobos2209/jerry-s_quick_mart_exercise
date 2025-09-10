@@ -1,11 +1,11 @@
 package models.Inventory;
 
 public class Product {
-    private String name;
+    private final String name;
     private int Stock;
-    private double RegularPrice;
-    private double MembersPrice;
-    private String Taxable;
+    private final double RegularPrice;
+    private final double MembersPrice;
+    private final String Taxable;
 
 
     public Product(String name, int Stock, double RegularPrice, double MembersPrice, String Taxable) {
@@ -36,6 +36,10 @@ public class Product {
                 " | Reg: $" + RegularPrice +
                 " | Memb: $" + MembersPrice +
                 " | Tax: " + Taxable;
+    }
+
+    public void setStock(int Stock){
+        this.Stock = Stock;
     }
 
     public String getName() { return name; }

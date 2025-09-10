@@ -3,6 +3,7 @@ package models.CheckOut;
 import models.Cart.CartItem;
 import models.Customer.Customer;
 import models.Customer.Member;
+import models.Inventory.Inventory;
 import models.Inventory.Product;
 
 import java.io.File;
@@ -17,7 +18,7 @@ public record CheckOut(Customer customer) {
 
     private static final double TAX_RATE = 0.065;
 
-    public void processCheckout(Scanner scanner) {
+    public void processCheckout(Scanner scanner, Inventory inventory) {
         double totalSavings = 0;
         int receiptNumber = getReceiptNumber();
         String receiptId = String.format("%06d", receiptNumber);
@@ -49,6 +50,10 @@ public record CheckOut(Customer customer) {
             int quantity = p.getQuantity();
             double unitPrice = customer.getPrice(product);
             double lineTotal = unitPrice * quantity;
+
+            product.setStock(product.getStock() - quantity);
+
+
             receipt.append(String.format("%-20s %-10d $%-11.2f $%-11.2f\n",
                     product.getName(), quantity, unitPrice, lineTotal));
 
@@ -107,6 +112,13 @@ public record CheckOut(Customer customer) {
         saveReceiptToFile("receipts/receipt_" + receiptId + ".txt", receipt.toString());
 
         customer.emptyCart();
+
+        try {
+            inventory.EditProductsFromFile(inventory.getRoute());
+            System.out.println("Inventory updated successfully.");
+        } catch (IOException e) {
+            System.out.println("Error updating inventory: " + e.getMessage());
+        }
     }
 
     private void saveReceiptToFile(String filePath, String receiptContent) {
