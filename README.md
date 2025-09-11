@@ -23,11 +23,11 @@ A **Java console application** that simulates a supermarket with the following f
   (On macOS it usually comes pre-installed. On Linux/macOS check with `java -version`)
 if it's not install used this command
 
-###For LINUX
+### For LINUX
 ```bash
 sudo apt install openjdk-17-jdk-headless --fix-missing
 ```
-###For MAC
+### For MAC
 1. install HomeBrew
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
