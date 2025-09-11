@@ -21,7 +21,8 @@ A **Java console application** that simulates a supermarket with the following f
 
 - **Java JDK 17+**  
   (On macOS it usually comes pre-installed. On Linux/macOS check with `java -version`)
-if it's not install used this command 
+if it's not install used this command
+
 ###For LINUX
 ```bash
 sudo apt install openjdk-17-jdk-headless --fix-missing
