@@ -1,5 +1,7 @@
 package models.Menus;
 
+import utils.InputUtils;
+
 import java.util.Scanner;
 
 public class MainMenu {
@@ -15,9 +17,7 @@ public class MainMenu {
             System.out.println("\n=== MAIN MENU ===");
             System.out.println("1. Enter Store System");
             System.out.println("2. Exit");
-            System.out.print("Choose option: ");
-            option = scanner.nextInt();
-            scanner.nextLine();
+            option = InputUtils.getIntInput(scanner, "Choose option");
 
             switch(option) {
                 case 1:

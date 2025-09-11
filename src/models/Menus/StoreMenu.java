@@ -7,6 +7,7 @@ import models.Customer.Member;
 import models.Customer.Regular;
 import models.Inventory.Inventory;
 import models.Inventory.Product;
+import utils.InputUtils;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -44,9 +45,7 @@ public record StoreMenu(Scanner scanner) {
                 System.out.println("4. cart");
                 System.out.println("5. Checkout");
                 System.out.println("6. exit");
-                System.out.print("choose option: ");
-                option = scanner.nextInt();
-                scanner.nextLine();
+                option = InputUtils.getIntInput(scanner, "Choose option: ");
 
                 switch (option) {
                     case 1:

@@ -24,6 +24,10 @@ public record CheckOut(Customer customer) {
         String receiptId = String.format("%06d", receiptNumber);
         double subtotal = 0;
         double tax = 0;
+        String date = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
+        String dateFile = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("MMddyyyy"));
 
         if (customer.getCart().getProducts().isEmpty()) {
             System.out.println("Your cart is empty");
@@ -39,8 +43,8 @@ public record CheckOut(Customer customer) {
 
         receipt.append("\n=== CHECKOUT RECEIPT ===\n");
         receipt.append("Customer: ").append(customer.getName()).append("\n");
-        receipt.append("Date: ").append(LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("\n");
+        receipt.append(date).append("\n");
+        receipt.append("TRANSACTION: ").append(receiptId).append("\n");
         receipt.append("--------------------------------\n");
 
         receipt.append(String.format("%-20s %-10s %-12s %-12s\n", "ITEM", "QUANTITY", "UNIT PRICE", "TOTAL"));
@@ -109,7 +113,7 @@ public record CheckOut(Customer customer) {
         receipt.append(String.format("CHANGE: $%.2f\n", change));
 
         System.out.println(receipt);
-        saveReceiptToFile("receipts/receipt_" + receiptId + ".txt", receipt.toString());
+        saveReceiptToFile("receipts/receipt_" + receiptId  + "_" + dateFile + ".txt" , receipt.toString());
 
         customer.emptyCart();
 
