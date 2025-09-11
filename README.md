@@ -21,11 +21,33 @@ A **Java console application** that simulates a supermarket with the following f
 
 - **Java JDK 17+**  
   (On macOS it usually comes pre-installed. On Linux/macOS check with `java -version`)
-if it's not install used this command
-
+if it's not install used this command 
+###For LINUX
 ```bash
 sudo apt install openjdk-17-jdk-headless --fix-missing
 ```
+###For MAC
+1. install HomeBrew
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. install JDK 17
+```bash
+brew install openjdk@17
+```
+
+3. Vinculation
+```bash
+sudo ln -sfn /opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk
+```
+
+4. Environment variables configuration 
+```bash
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
 its no necesary any IDE for JAVA but the jdk is necessary
 
 ## How to Compile and Run
